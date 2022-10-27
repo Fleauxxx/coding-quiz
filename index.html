@@ -11,26 +11,29 @@
 </head>
 
 <body>
+    <header class="header">
+        <div>
+            <h1><span id="timer">1:20</span></h1>
+        </div>
+    </header>
+    
     <div class="container">
-        <div id="home" class="flex-column flex-center">
-            <h1>Think You Know Coding?</h1>
-            <a href="/game.html" class="btn">Play</a>
-            <a href="/highscores.html" id="highscore-btn" class="btn">High Scores<i class="fas fa-crown"></i></a>
-
+        <h1> Test your Coding Knowledge</h1>
+        <div id="question-container" class="hide">
+            <div id="questions">Questions</div>
+            <div id="answer-buttons" class="btn-grid">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
+            </div>
+        </div>
+        <div class="controls">
+            <button id="start-btn" class="start-btn btn">Start</button>
+            <button id="next-btn" class="next-btn btn hide">Next</button>
         </div>
     </div>
-
-
-
-<!-- 
-
-    <button id="startBtn"> Start </button>
-    <span id="timer">60</span> -->
-
-
-
-
-
+    </div>
 
 
     <script src="script.js"></script>

@@ -1,15 +1,23 @@
-var startBtn =  document.getElementById("startBtn")
+var startButton =  document.getElementById("start-btn")
+var nextButton =  document.getElementById("next-btn")
 var timer = document.getElementById("timer")
-var timeLeft = 60
-var currentQuestionIndex = 0
-var questionContainer = document.getElementById("questionContainer")
-var currentChoicesIndex = 0
-for (var i = 0; i < testQuestions.length; i++) {
-    var response = 
+var questionContainerElement = document.getElementById("question-container")
+var questionElement = document.getElementById('questions')
+var answerButtonsElement = document.getElementById('answer-buttons')
 
-}
+var shuffledQuestions, currentChoicesIndex
+
+var timeLeft = 120
+var currentQuestionIndex = 0
 
 function startQuiz() {
+    console.log('started')
+    startButton.classList.add('hide')
+    shuffledQuestions = questions.sort(() => Math.random() - .5)
+    currentChoicesIndex = 0
+    questionContainerElement.classList.remove('hide')
+    setNextQuestion()
+
     var timerInterval = setInterval(function() {
         timeLeft--;
         timer.textContent = timeLeft + " seconds left.";
@@ -19,49 +27,114 @@ function startQuiz() {
         }
 
     }, 1000);
-    showQuestion();
 }
 
-function showQuestion() {
-    var question = testQuestions[currentQuestionIndex]
-    var questionText = document.createElement("p")
-    var choices = testQuestions[currentChoicesIndex]
-    var choicesText = document.createElement("button")
-    var choicesText = document.createElement("button")
-    var choicesText = document.createElement("button")
-    var choicesText = document.createElement("button")
-    
-    questionText.textContent = question.question
-    questionText.classList.add("questionText")
-    questionContainer.appendChild(questionText)
-    choicesText.textContent = choices.choices
-    questionContainer.appendChild(choicesText)
-
-
+function setNextQuestion() {
+    resetState()
+    showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
-var testQuestions = [
+function showQuestion(question) {
+    questionElement.innerText = question.question
+    question.answers.forEach(answer => {
+        var button = document.createElement('button')
+        button.innerText = answer.text
+        button.classList.add('btn')
+        if (answer.correct) {
+            button.dataset.correct = answer.correct
+        }
+        button.addEventListener('click', selectAnswer)
+        answerButtonsElement.append(button)
+    })
+}
+
+function resetState() {
+    clearStatusClass(document.body)
+    nextButton.classList.add('hide')
+    while (answerButtonsElement.firstChild) {
+        answerButtonsElement.removeChild
+        (answerButtonsElement.firstChild)
+    }
+}
+
+
+function selectAnswer(e) {
+    var selectedButton = e.target
+    var correct = selectedButton.dataset.correct
+    setStatusClass(document.body, correct)
+    Array.from(answerButtonsElement.children).forEach(button => {
+        setStatusClass(button, button.dataset.correct)
+    })
+    if (shuffledQuestions.length > currentQuestionIndex + 1) {
+        nextButton.classList.remove('hide')
+    } else {
+        startButton.innerText = 'Restart'
+        startButton.classList.remove('hide')
+    }
+}
+
+function setStatusClass(element, correct) {
+    clearStatusClass(element)
+    if (correct) {
+        element.classList.add('correct')
+    } else {
+        element.classList.add('wrong')
+    }
+}
+
+function clearStatusClass(element) {
+    element.classList.remove('correct')
+    element.classList.remove('wrong')
+}
+
+
+var questions = [
     {
         question: "What does HTML stand for?", 
-        choices: [' Here Take My Lunch ', ' Hyper Text Markup Language ', ' Hired To Mow Lawns ', ' High Textured Makeup Lady '],
-        answer: 'Hyper Text Markup Language',
+        answers: [
+            { text:' Here Take My Lunch ', correct: false},
+            { text:' Hyper Text Markup Language ',  correct: true},
+            { text:' Hired To Mow Lawns ', correct: false},
+            { text:' Hyper Toddler Mommy Lover', correct: false}
+
+        ]
     },
     {
-        question: "this is a question", 
-        choices: ['answer1', 'answer2', 'answer3', 'answer4'],
-        answer: 'answer2',
+        question: "What does JSON stand for?", 
+        answers: [
+            { text:' JavaScript Object Notation ',  correct: true},
+            { text:' Joint Service Online Network ', correct: false},
+            { text:' JavaScript Online Notification ', correct: false},
+            { text:' Java Server Observation Number', correct: false}
+
+        ]
     },
     {
-        question: "this is a question", 
-        choices: ['answer1', 'answer2', 'answer3', 'answer4'],
-        answer: 'answer2',
+        question: "CSS is commonly known as?", 
+        answers: [
+            { text:' Customer Service Support ', correct: false},
+            { text:' Computer System Server ', correct: false},
+            { text:' Community Support Services', correct: false},
+            { text:' Cascading Style Sheet ',  correct: true}
+
+        ]
     },
     {
-        question: "this is a question", 
-        choices: ['answer1', 'answer2', 'answer3', 'answer4'],
-        answer: 'answer2',
-    },
+        question: "Which of the following is not an HTML element?", 
+        answers: [
+            { text:' <div>', correct: false},
+            { text:' <section> ', correct: false},
+            { text:' <h7> ',  correct: true},
+            { text:' <footer> ', correct: false}
+
+        ]
+    }
 ]
+   
 
 
-startBtn.addEventListener("click", startQuiz)
+startButton.addEventListener("click", startQuiz)
+nextButton.addEventListener('click', () => {
+    currentQuestionIndex++
+    setNextQuestion()
+})
