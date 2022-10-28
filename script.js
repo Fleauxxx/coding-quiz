@@ -1,19 +1,19 @@
+// Variables used to select elements from my html
 var startButton =  document.getElementById("start-btn")
 var nextButton =  document.getElementById("next-btn")
 var timer = document.getElementById("timer")
 var questionContainerElement = document.getElementById("question-container")
 var questionElement = document.getElementById('questions')
 var answerButtonsElement = document.getElementById('answer-buttons')
-
-var shuffledQuestions, currentChoicesIndex
-
+var randomQuestions, currentChoicesIndex
 var timeLeft = 120
 var currentQuestionIndex = 0
 
+// This function allows you to start the quiz. 
+//  Upon pressing the start button a timer will countdown and a question will appear.
 function startQuiz() {
-    console.log('started')
     startButton.classList.add('hide')
-    shuffledQuestions = questions.sort(() => Math.random() - .5)
+    randomQuestions = questions.sort(() => Math.random() - .5)
     currentChoicesIndex = 0
     questionContainerElement.classList.remove('hide')
     setNextQuestion()
@@ -28,10 +28,10 @@ function startQuiz() {
 
     }, 1000);
 }
-
+// The set next question function will chose a random question from the question index.
 function setNextQuestion() {
     resetState()
-    showQuestion(shuffledQuestions[currentQuestionIndex])
+    showQuestion(randomQuestions[currentQuestionIndex])
 }
 
 function showQuestion(question) {
@@ -65,14 +65,14 @@ function selectAnswer(e) {
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
-    if (shuffledQuestions.length > currentQuestionIndex + 1) {
+    if (randomQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove('hide')
     } else {
         startButton.innerText = 'Restart'
         startButton.classList.remove('hide')
     }
 }
-
+// set the body classes of green or red if the selected answer is right or wrong.
 function setStatusClass(element, correct) {
     clearStatusClass(element)
     if (correct) {
@@ -81,13 +81,13 @@ function setStatusClass(element, correct) {
         element.classList.add('wrong')
     }
 }
-
+// resets the body classes from green or red when you got the next question.
 function clearStatusClass(element) {
     element.classList.remove('correct')
     element.classList.remove('wrong')
 }
 
-
+// Array of objects containing my questions and answers.
 var questions = [
     {
         question: "What does HTML stand for?", 
