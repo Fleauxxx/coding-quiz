@@ -1,91 +1,66 @@
-// Variables used to select elements from my html
-var startButton =  document.getElementById("start-btn")
-var nextButton =  document.getElementById("next-btn")
-var timer = document.getElementById("timer")
-var questionContainerElement = document.getElementById("question-container")
-var questionElement = document.getElementById('questions')
-var answerButtonsElement = document.getElementById('answer-buttons')
-var randomQuestions, currentChoicesIndex
-var timeLeft = 120
-var currentQuestionIndex = 0
+let questionContainer = document.getElementById("question-container")
+let questionEl = document.getElementById("question")
+let answersEl = document.getElementById("answers")
+let timer = document.getElementById("timer")
+const startBtn = document.getElementById("start-btn")
+const nextBtn = document.getElementById("next-btn")
+const quitBtn = document.getElementById("quit-btn")
+var randomQuestion, currentIndex
+var timeLeft = 60
+var currentIndex = 0
 
-// This function allows you to start the quiz. 
-//  Upon pressing the start button a timer will countdown and a question will appear.
-function startQuiz() {
-    startButton.classList.add('hide')
-    randomQuestions = questions.sort(() => Math.random() - .5)
-    currentChoicesIndex = 0
-    questionContainerElement.classList.remove('hide')
-    setNextQuestion()
 
-    var timerInterval = setInterval(function() {
-        timeLeft--;
-        timer.textContent = timeLeft + " seconds left.";
 
-        if(timeLeft === 0) {
-            clearInterval(timerInterval);
-        }
-
-    }, 1000);
+// function to begin the quiz
+function loadQuiz(){
+    startBtn.classList.add('cover')
+    randomQuestion = questions.sort(() => Math.random() - .5)
+    currentIndex = 0
+    questionContainer.classList.remove('cover')
+    nextQuestion()
 }
-// The set next question function will chose a random question from the question index.
-function setNextQuestion() {
-    resetState()
-    showQuestion(randomQuestions[currentQuestionIndex])
+   
+// this function calls the next question
+function nextQuestion(){
+    // resetContainer()
+    renderQuestion(randomQuestion[currentIndex])
+
+    
 }
 
-function showQuestion(question) {
-    questionElement.innerText = question.question
+function renderQuestion(question) {
+    questionEl.innerText = question.question
     question.answers.forEach(answer => {
-        var button = document.createElement('button')
+        let button = document.createElement('button')
         button.innerText = answer.text
         button.classList.add('btn')
-        if (answer.correct) {
-            button.dataset.correct = answer.correct
-        }
-        button.addEventListener('click', selectAnswer)
-        answerButtonsElement.append(button)
+        // if (answer.correct) { alert("correct");
+            
+        // }
+        button.addEventListener('click', pickAnswer)
+        answersEl.append(button)
     })
 }
 
-function resetState() {
-    clearStatusClass(document.body)
-    nextButton.classList.add('hide')
-    while (answerButtonsElement.firstChild) {
-        answerButtonsElement.removeChild
-        (answerButtonsElement.firstChild)
+
+
+function resetContainer(){
+    while (answersEl.firstChild) {
+        answersElement.removeChild
+        (answersElement.firstChild)
     }
+
 }
 
 
-function selectAnswer(e) {
-    var selectedButton = e.target
-    var correct = selectedButton.dataset.correct
-    setStatusClass(document.body, correct)
-    Array.from(answerButtonsElement.children).forEach(button => {
-        setStatusClass(button, button.dataset.correct)
-    })
-    if (randomQuestions.length > currentQuestionIndex + 1) {
-        nextButton.classList.remove('hide')
-    } else {
-        startButton.innerText = 'Restart'
-        startButton.classList.remove('hide')
-    }
-}
-// set the body classes of green or red if the selected answer is right or wrong.
-function setStatusClass(element, correct) {
-    clearStatusClass(element)
-    if (correct) {
-        element.classList.add('correct')
-    } else {
-        element.classList.add('wrong')
-    }
-}
-// resets the body classes from green or red when you got the next question.
-function clearStatusClass(element) {
-    element.classList.remove('correct')
-    element.classList.remove('wrong')
-}
+
+function quitQuiz() {
+    startBtn.classList.remove('cover')
+    questionContainer.classList.add('cover')
+  }
+
+
+
 
 // Array of objects containing my questions and answers.
 var questions = [
@@ -133,8 +108,14 @@ var questions = [
    
 
 
-startButton.addEventListener("click", startQuiz)
-nextButton.addEventListener('click', () => {
-    currentQuestionIndex++
-    setNextQuestion()
+startBtn.addEventListener("click", loadQuiz)
+// nextBtn.addEventListener('click', () => {
+   
+// })
+quitBtn.addEventListener('click', quitQuiz)
+
+nextBtn.addEventListener('click', () => {
+    currentIndex++
+    nextQuestion()
 })
+  

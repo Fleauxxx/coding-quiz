@@ -1,97 +1,122 @@
-@import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap');
-
-*, *::before, *::after {
-    box-sizing: border-box;
-    font-family: "Nova Square, cursive";
-}
-
-:root {
-    --hue-neutral: 200;
-    --hue-wrong: 0;
-    --hue-correct: 145;
-
-}
-
-body {
-    --hue: var(--hue-neutral);
-    padding: 0;
+*{
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
-    background-color: hsl(var(--hue), 100%, 20%);
-
-}
-
-body.correct {
-    --hue: var(--hue-correct);
-}
-
-body.wrong {
-    --hue: var(--hue-wrong);
-}
-
-.container {
-    width: 800px;
-    max-width: 80%;
-    background-color: white;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0 0 10px 2px;
+    padding: 0;
+    box-sizing: border-box;
+    
     
 }
 
-.btn-grid {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 10px;
-    margin: 20px 0;
-}
-
-.btn {
-    --hue: var(--hue-neutral);
-    border: 1px solid hsl(var(--hue), 100%, 30%);
-    background-color: hsl(var(--hue), 100%, 50%);
-    border-radius: 5px;
-    padding: 5px 10px;
-    color: white;
-}
-
-.btn:hover {
-    cursor: pointer;
-    box-shadow: 0 0.4rem 1.4rem 0 rgb(255, 255, 255);
-    transition: transform 150ms;
-    transform: scale(1.03);
-}
- 
-.btn.correct {
-    --hue: var(--hue-correct);
-}
-
-.btn.wrong {
-    --hue: var(--hue-wrong);
-}
-
-.start-btn, .next-btn {
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 10px 20px;
-}
-
-.controls {
+body{
+    background-color: rgb(31, 72, 124);
     display: flex;
     justify-content: center;
+    flex-direction: column;
+
+
+}
+
+.header{
+    margin-top: 5px;
+    margin-bottom: 100px;
+    padding: 5px;
+    padding-right: 10px;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-
+    border: solid rgb(21, 255, 0) 3px;
 }
 
-.hide {
-    display: none;
-}
-
-.header {
+.container {
+    width: 700px;
+    background-color: rgb(161, 8, 154);
+    padding: 10px;
+    border: solid black 3px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-left: 300px;
+    
+    
+    
 }
+
+#question{
+    font-weight: 600;
+    
+
+}
+
+.btn{
+    border-radius: 10px;
+    height: 35px;
+    background-color: greenyellow;
+    font-weight: 600;
+}
+
+.btn:hover{
+    background-color: blue;
+}
+
+.btn-style {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    gap: 2em;
+    margin: 20px 0;
+    background-color: rgb(161, 8, 154);
+    width: 70%;
+    border-radius: 10px;
+    
+
+}
+
+.nav-controls{
+    margin-top: 1px;
+    border: solid rgb(192, 5, 161) 5px;
+    width: 700px;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    background-color: forestgreen;
+    margin-left: 300px;
+
+    
+   
+}
+
+.start-btn{
+    width: 10%;
+    border-radius: 10px;
+    font-size: medium;
+}
+
+.start-btn:hover{
+   background-color: blueviolet;
+}
+
+.next-btn{
+    width: 10%;
+    border-radius: 10px;
+    font-size: medium;
+}
+
+.next-btn:hover{
+    background-color: blueviolet;
+ }
+
+ .quit-btn{
+    width: 10%;
+    border-radius: 10px;
+    font-size: medium;
+}
+
+.quit-btn:hover{
+    background-color: blueviolet;
+ }
+
+ .cover {
+    display: none;
+ }
+

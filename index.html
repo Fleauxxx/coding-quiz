@@ -1,46 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coding Quiz</title>
-    <!-- CSS only -->
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div>
-        <header class="header">
-            <div>
-                <h1><span id="timer">1:20</span></h1>
-            </div>
-        </header>
+      <header class="header">
+        <div class="score">High Scores!</div>
+        <div>
+          <h1><span id="timer">60</span></h1>
+        </div>
+      </header>
     </div>
 
-    
-    
     <div class="container">
-        <!-- <h1> Test your Coding Knowledge</h1> -->
-        <div id="question-container" class="hide">
-            <div id="questions">Questions</div>
-            <div id="answer-buttons" class="btn-grid">
-                <button class="btn">Answer 1</button>
-                <button class="btn">Answer 2</button>
-                <button class="btn">Answer 3</button>
-                <button class="btn">Answer 4</button>
-            </div>
+      <div id="question-container" class="cover">
+        <div id="question">Click Start to begin...</div>
+
+        <div id="answers" class="btn-style">
+          <button class="btn">Answer One</button>
+          <button class="btn">Answer Two</button>
+          <button class="btn">Answer Three</button>
+          <button class="btn">Answer Four</button>
         </div>
-        <div class="controls">
-            <button id="start-btn" class="start-btn btn">Start</button>
-            <button id="next-btn" class="next-btn btn hide">Next</button>
-        </div>
-    </div>
+      </div>
     </div>
 
+    <div class="nav-controls">
+      <button id="start-btn" class="start-btn btn">Start</button>
+      <button id="next-btn" class="next-btn btn">Next</button>
+      <button id="quit-btn" class="quit-btn btn">Quit</button>
+    </div>
 
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
