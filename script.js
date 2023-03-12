@@ -22,7 +22,6 @@ function loadQuiz(){
    
 // this function calls the next question
 function nextQuestion(){
-    // resetContainer()
     renderQuestion(randomQuestion[currentIndex])
 
     
@@ -34,23 +33,12 @@ function renderQuestion(question) {
         let button = document.createElement('button')
         button.innerText = answer.text
         button.classList.add('btn')
-        // if (answer.correct) { alert("correct");
-            
-        // }
-        button.addEventListener('click', pickAnswer)
+        button.addEventListener('click')
         answersEl.append(button)
     })
 }
 
 
-
-function resetContainer(){
-    while (answersEl.firstChild) {
-        answersElement.removeChild
-        (answersElement.firstChild)
-    }
-
-}
 
 
 
